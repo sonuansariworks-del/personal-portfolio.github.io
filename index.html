@@ -334,42 +334,62 @@
           </div>
           <!-- END LEFT SIDE -->
 
-          <!-- RIGHT SIDE FORM -->
-          <div class="right">
-            <form
-              action="https://formsubmit.co/sonuansari.works@gmail.com"
-              method="POST"
-              target="hidden_iframe"
-              onsubmit="showSuccess()"
-            >
-              <input type="hidden" name="_captcha" value="false" />
+       <!-- RIGHT SIDE FORM -->
+        <div class="right">
 
-              <input type="text" name="name" placeholder="Your Name" required />
+          <form id="contactForm">
 
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                required
-              />
+            <input type="text" id="name" placeholder="Your Name" required />
 
-              <textarea
-                name="message"
-                rows="4"
-                placeholder="Your Message"
-                required
-              ></textarea>
+            <input type="email" id="email" placeholder="Your Email" required />
 
-              <button type="submit">Send Message</button>
-            </form>
+            <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
 
-            <iframe name="hidden_iframe" style="display: none"></iframe>
+            <button type="submit">Send Message</button>
 
-            <p id="success-message" style="display: none" ;>
-              Message sent successfully! I will contact you soon.
-            </p>
-          </div>
-          <!-- END RIGHT SIDE -->
+          </form>
+
+          <p id="success-message" style="display: none; color: rgb(93, 139, 223); margin-top: 15px;">
+            Thanks for contacting me! Redirecting to WhatsApp...
+          </p>
+
+        </div>
+
+        <script>
+          document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Get values
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+
+            // WhatsApp message
+            let whatsappMessage =
+              ` New Contact Message 
+                Name: ${name}
+                Email: ${email}
+                Message:
+                ${message}`;
+            // Your WhatsApp number
+            let phoneNumber = "919793584820";
+
+            // Show success message
+            document.getElementById("success-message").style.display = "block";
+
+            // Redirect to WhatsApp
+            let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+            setTimeout(() => {
+              window.open(whatsappURL, "_blank");
+            }, 1000);
+
+            // Reset form
+            document.getElementById("contactForm").reset();
+          });
+        </script>
+                  <!-- END RIGHT SIDE -->
+
         </div>
       </div>
     </section>
